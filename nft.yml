@@ -1,0 +1,58 @@
+---
+- name: Installing nginx server and setting up
+  hosts: private2
+  become: yes
+  vars:
+    web: NFT.com
+    port: 80
+    web_https: www.nft.com
+  tasks:
+     - name: update the private server
+       command: apt update
+     - name: install nginx to the private server
+       ansible.builtin.package:
+          name: nginx
+          state: latest
+          update_cache: yes
+     - name: start nginx
+       service:
+          name: nginx
+          state: started
+     - name: enable private server ufw
+       community.general.ufw:
+          state: enabled
+          policy: allow
+     - name: ufw allow nginx full
+       community.general.ufw:
+          rule: allow
+          name: 'nginx full'
+     - name: ufw allow port 80
+       community.general.ufw:
+          rule: allow
+          port: '80'
+          proto: tcp
+     - name: ufw allow port 443
+       community.general.ufw:
+          rule: allow
+          port: '443'
+          proto: tcp
+     - name: copy a directory to private server
+       ansible.builtin.copy:
+          src: /home/ubuntu/NFT.com
+          dest: /var/www/
+          owner: ubuntu
+          group: ubuntu
+          mode: '0755'
+     - name: copy nft.com file to private server
+       template:
+          src: /home/ubuntu/nft.com
+          dest: /etc/nginx/sites-available/
+          mode: '0644' 
+     #- name: create a symbolink for nginx to read on startup
+       #shell: sudo ln -s /etc/nginx/sites-available/nft.com /etc/nginx/sites-enabled
+     #- name: move default file from sites-enabled
+       #shell: mv /etc/nginx/sites-enabled/default /home/ubuntu
+     - name: restart nginx server
+       service:
+           name: nginx
+           state: restarted
