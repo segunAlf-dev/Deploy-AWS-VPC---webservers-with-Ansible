@@ -53,4 +53,31 @@
   - You would see some details below choose **routes**, then **edit routes**
   - Click on add route, under **"destination"**and input an IP from anywhere [**(0.0.0.0/0)**, it means to allow the whole internet or any IP address to communicate with the webserver]
   - Next under the **target**, search for nat gateway and select the populated nat ID
+ ## 6. Security Group
+ - Go to security section on the services menu and click on security group
+ - Click on create security group
+  - Input a custom security group name
+  - Input a fitting description 
+  - Select your custom vpc from the dropdown **(Altschool Vpc)**
+  - Add Inbound rules and under "Type" select "All Traffic", "Source" "select Anywhere"
+  - Next click on create security group button
+ ### Hurray! You just created a VPC with both public and private subnets
+ ## 7. Spin up AWS Ec2 Instance
+ - Navigate to aws services and search for Ec2 instance
+ - Click on "Launch Instance" button; to create an instance
+  - Input the custom name for your instance
+  - Select the Ubuntu OS application from list of OS Images
+  - Next create a new key-pair, if you don't have an existing key-pair
+  - For Networks, edit network settings 
+   - choose your private subnet, in this case  ** US-east1a ** 
+   - select an existing security group **(altschool-security-group)**
+    - Configure storage to choice and do keep in mind the cost implications
+   - then you launch the instance 
+  - Repeat the same process to create 2 more instances one with the second private subnet and the other with a public subnet 
+ ## Load Balancer
+ - In this section, cliclk on "Target Groups"
+ - Click on create target group; input a targget group name
+ - Select your custom Vpc **(Altschool Vpc)**
+ - Click on next
+ - Then select your 2 private instances 
  
