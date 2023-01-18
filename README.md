@@ -1,6 +1,7 @@
 # Deploy-AWS-VPC---webservers-with-Ansible
 ### This is a cloud engineering assignment from Altschool Africa
 ![AWS Architecture](https://github.com/segunAlf-dev/Deploying-AWS-VPC_Loadbalancer-to-host-webservers-using-Ansible/blob/main/AWS%20Arch..png)
+##### source: [AWS](https://aws.amazon.com/blogs/security/protect-your-remote-workforce-by-using-a-managed-dns-firewall-and-network-firewall/)
 ## Introduction
 ### To create a VPC (Virtual Private Cloud) with public and private subnets is one of the ways to segregate applications and resources from the public internet.This Readme is a simple guide on how to create a VPC with subnets, route tables, internet gateway, NAT gateway, and security groups in AWS (Amazon Web Services)
 ### Perequisites
